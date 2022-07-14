@@ -1,7 +1,9 @@
+import { useState,useEffect } from 'react'
+import ItemDetail from '../components/ItemDetail'
 import '../css/ItemDetailContainer.css'
 const ItemDetailContainer = () => {
 
-    const data = {
+  const data = [{
         "id": 1,
         "title": "iPhone 9",
         "description": "An apple mobile which is nothing like apple",
@@ -12,27 +14,27 @@ const ItemDetailContainer = () => {
         "brand": "Apple",
         "category": "smartphones",
         "thumbnail": "https://dummyjson.com/image/i/products/1/thumbnail.jpg",
-        "images": [
-          "https://dummyjson.com/image/i/products/1/1.jpg",
-          "https://dummyjson.com/image/i/products/1/2.jpg",
-          "https://dummyjson.com/image/i/products/1/3.jpg",
-          "https://dummyjson.com/image/i/products/1/4.jpg",
-          "https://dummyjson.com/image/i/products/1/thumbnail.jpg"
-        ]
-      }
-    
-    function getItem() {
-        return new Promise((resolve,reject)=>{
-           setTimeout(() => {
-            resolve(data)
-           }, 2000);
-        })
+  }]
+  const [datos, setDatos] = useState([])
+
+  useEffect(() => {
+    const getItem = ()=>{
+      return new Promise ((resolve,reject)=>{
+        setTimeout(() => {
+          resolve(data)
+        }, 2000);
+      })
     }
-
+    getItem().then((res)=>{
+      setDatos(res)
+    })
+  }, [])
+  
+  
   return (
-    <div className='container'>
-
-    </div>
+    <>
+      <ItemDetail producto={datos}/>
+    </>
   )
 }
 export default ItemDetailContainer
